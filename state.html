@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <div id="root"></div>
+  </body>
+  <script
+    crossorigin
+    src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"
+  ></script>
+  <script
+    crossorigin
+    src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"
+  ></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+    function MinToHour() {
+      const [minutes, setMinutes] = React.useState(0);
+      const [flipped, setFlipped] = React.useState(false);
+      const onChangeMin = (event) => {
+        setMinutes(event.target.value);
+      };
+      const onChangeHour = (event) => {
+        setMinutes(event.target.value * 60);
+      };
+      const reset = () => setMinutes(0);
+      const flip = () => setFlipped((current) => !flipped);
+      return (
+        <div>
+          <div>
+            <label htmlFor="minutes">Minutes</label>
+            <input
+              value={minutes}
+              id="minutes"
+              placeholder="Minutes"
+              type="number"
+              onChange={onChangeMin}
+              disabled={flipped}
+            />
+          </div>
+          <div>
+            <label htmlFor="hours">To Hours</label>
+            <input
+              value={Math.round(minutes / 60)}
+              id="hours"
+              placeholder="Hours"
+              type="number"
+              onChange={onChangeHour}
+              disabled={!flipped}
+            />
+          </div>
+          <button onClick={reset}>Reset</button>
+          <button onClick={flip}>Flip</button>
+        </div>
+      );
+    }
+
+    function App() {
+      const [index, setIndex] = React.useState("0");
+      const onSelect = (event) => {
+        setIndex(event.target.value);
+      };
+
+      return (
+        <div>
+          <h1>Super Converter</h1>
+          <br />
+          <select value={index} onChange={onSelect}>
+            <option value="0">Min to Hour</option>
+            <option value="1">...</option>
+          </select>
+          {index === "0" ? <MinToHour /> : null}
+        </div>
+      );
+    }
+
+    const root = document.getElementById("root");
+    ReactDOM.render(<App />, root);
+  </script>
+</html>
