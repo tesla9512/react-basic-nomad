@@ -12,4 +12,5 @@
 - state.html : React.useState를 이해하기 위한 분/시간 변환기 만들기
 - prop.html : React.prop을 이해하기 위한 버튼 컴포넌트 만들기
 
-index.html은 prop.html
+index.html은 prop.html과 같다
+
